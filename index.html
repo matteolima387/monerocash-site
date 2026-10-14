@@ -3,168 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monero Cash Protocol | Next-Gen Privacy</title>
+    <title>Monero Cash - Dinheiro Digital Privado e Descentralizado</title>
     <style>
-        :root {
-            --bg-main: #060913;
-            --bg-card: #0d1326;
-            --primary: #f59e0b;
-            --primary-hover: #d97706;
-            --accent: #38bdf8;
-            --text-muted: #9ca3af;
-        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            background-color: var(--bg-main); 
-            color: #f3f4f6; 
-            font-family: 'Segoe UI', Roboto, sans-serif; 
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            overflow-x: hidden;
-            background: radial-gradient(circle at 50% 30%, #111e3d 0%, #060913 70%);
-        }
-        .container {
-            max-width: 1000px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        @media (max-width: 768px) {
-            .container { grid-template-columns: 1fr; text-align: center; }
-            .terminal-window { margin: 0 auto; }
-        }
-        .hero-text { padding: 20px 0; }
-        .badge { 
-            background-color: rgba(56, 189, 248, 0.1); 
-            color: var(--accent); 
-            padding: 6px 14px; 
-            border-radius: 20px; 
-            font-size: 0.8rem; 
-            font-weight: bold; 
-            display: inline-block; 
-            margin-bottom: 20px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            letter-spacing: 1px;
-        }
-        h1 { font-size: 3.5rem; color: #fff; line-height: 1.1; margin-bottom: 20px; font-weight: 800; }
-        h1 span { color: var(--primary); }
-        p.subtitle { color: var(--text-muted); font-size: 1.2rem; line-height: 1.6; margin-bottom: 30px; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; color: #4a4a4a; background-color: #fcfcfc; line-height: 1.6; }
         
-        /* Captura Estilo Lista de Espera */
-        .waitlist-form { display: flex; gap: 10px; background: rgba(255,255,255,0.03); padding: 6px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08); }
-        .waitlist-form input { background: transparent; border: none; padding: 12px; color: #fff; flex: 1; font-size: 1rem; outline: none; }
-        .waitlist-form button { background-color: var(--primary); color: #000; border: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 1rem; }
-        .waitlist-form button:hover { background-color: var(--primary-hover); }
-        @media (max-width: 480px) {
-            .waitlist-form { flex-direction: column; background: transparent; border: none; padding: 0; }
-            .waitlist-form input { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; margin-bottom: 10px; width: 100%; }
-        }
+        /* Navbar Superior */
+        header { background: #fff; border-bottom: 2px solid #f2f2f2; padding: 15px 0; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .logo-area { font-size: 1.8rem; font-weight: bold; color: #f59e0b; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .logo-area span { color: #111827; }
+        nav a { text-decoration: none; color: #4b5563; font-weight: 600; margin: 0 15px; font-size: 0.95rem; transition: 0.2s; }
+        nav a:hover { color: #f59e0b; }
 
-        /* Simulador Estilo Terminal Cyberpunk / Solo Leveling */
-        .terminal-window {
-            background-color: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            overflow: hidden;
-        }
-        .terminal-header {
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
-        .dot-r { background-color: #ef4444; }
-        .dot-y { background-color: #eab308; }
-        .dot-g { background-color: #22c55e; }
-        .terminal-title { font-size: 0.8rem; color: var(--text-muted); font-family: monospace; margin-left: auto; }
-        .terminal-body { padding: 25px; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; text-align: left; }
-        .stat-line { margin-bottom: 15px; }
-        .stat-label { color: var(--text-muted); }
-        .stat-value { color: #fff; font-weight: bold; }
-        .stat-value.active { color: var(--accent); }
-        .stat-value.crypto { color: var(--primary); }
+        /* Container de Seções */
+        .container { max-width: 960px; margin: 0 auto; padding: 40px 20px; }
         
-        .divider { height: 1px; background: rgba(255,255,255,0.05); margin: 20px 0; }
-        .pulse-box { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #22c55e; }
-        .pulse-dot { width: 8px; height: 8px; background-color: #22c55e; border-radius: 50%; box-shadow: 0 0 8px #22c55e; animation: pulse 1.5s infinite; }
+        /* Seção Hero Principal */
+        .hero { display: flex; flex-wrap: wrap; gap: 30px; align-items: center; background: #f3f4f6; border-radius: 12px; padding: 40px; margin-bottom: 50px; }
+        .hero-video-placeholder { flex: 1; min-width: 300px; background: #000; border-radius: 8px; height: 240px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-family: monospace; border: 3px solid #f59e0b; }
+        .hero-text { flex: 1; min-width: 300px; }
+        .hero-text h1 { font-size: 2.2rem; color: #111827; margin-bottom: 15px; }
+        .hero-text h1 span { color: #f59e0b; }
         
-        @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 0.6; }
-            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 14px #22c55e; }
-            100% { transform: scale(0.9); opacity: 0.6; }
-        }
+        /* Grid de Recursos do Ecossistema */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+        @media(max-width: 768px) { .grid { grid-template-columns: 1fr; } .hero { flex-direction: column; text-align: center; } }
+        
+        .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.3s; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px rgba(0,0,0,0.05); }
+        .card h3 { font-size: 1.4rem; color: #111827; margin-bottom: 12px; }
+        
+        /* Formulário de Captura Oculto (Estilo Solo Leveling/Manus) */
+        .waitlist-box { background: #111827; color: #fff; border-radius: 12px; padding: 40px; text-align: center; margin-bottom: 50px; box-shadow: 0 10px 25px rgba(17,24,39,0.3); }
+        .waitlist-box h2 { color: #f59e0b; margin-bottom: 10px; font-size: 1.8rem; }
+        .waitlist-box p { color: #9ca3af; margin-bottom: 25px; }
+        .input-group { display: flex; max-width: 500px; margin: 0 auto; gap: 10px; }
+        .input-group input { flex: 1; padding: 12px; border-radius: 6px; border: 1px solid #374151; background: #1f2937; color: #fff; outline: none; font-size: 1rem; }
+        
+        /* Botões Globais Modificados */
+        .btn { display: inline-block; background: #f59e0b; color: #fff; text-decoration: none; font-weight: 700; padding: 10px 22px; border-radius: 4px; border: none; font-size: 0.9rem; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
+        .btn:hover { background: #d97706; }
+        .btn-dark { background: #111827; color: #fff; }
+        .btn-dark:hover { background: #1f2937; }
+
+        /* Rodapé Institucional Focado em Negócios */
+        footer { background: #262626; color: #a3a3a3; padding: 40px 20px; font-size: 0.85rem; }
+        .footer-grid { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        @media(max-width: 600px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        .footer-col h4 { color: #fff; margin-bottom: 15px; font-size: 0.95rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 8px; }
+        .footer-col ul li a { color: #a3a3a3; text-decoration: none; }
+        .footer-col ul li a:hover { color: #f59e0b; }
+        .footer-bottom { max-width: 960px; margin: 30px auto 0; text-align: center; border-top: 1px solid #404040; padding-top: 20px; color: #737373; }
     </style>
 </head>
 <body>
 
+    <!-- Cabeçalho idêntico à estrutura do original -->
+    <header>
+        <div class="logo-area">Monero <span>Cash</span></div>
+        <nav>
+            <a href="#começar">Primeiros Passos</a>
+            <a href="#downloads">Downloads</a>
+            <a href="#tecnologia">Tecnologia</a>
+            <a href="#sistema">Painel Solo</a>
+        </nav>
+    </header>
+
     <div class="container">
         
-        <!-- Lado Esquerdo: Texto de Impacto Institucional -->
-        <div class="hero-text">
-            <span class="badge">SUNG JIN-WOO SYSTEM DEVELOPMENT</span>
-            <h1>Monero <span>Cash</span></h1>
-            <p class="subtitle">A evolução definitiva da soberania financeira digital. Uma blockchain de privacidade absoluta baseada em assinaturas em anel ocultas, projetada e executada de forma independente.</p>
-            
-            <div class="waitlist-form">
-                <input type="email" placeholder="Seu melhor e-mail criptografado" required>
-                <button type="submit">Acesso Antecipado</button>
+        <!-- Bloco Hero Principal Traduzido e Adaptado -->
+        <section class="hero">
+            <div class="hero-video-placeholder">
+                > PROTOCOLO_XMR_C_ONLINE<br>
+                > CORE: RING_SIGNATURES<br>
+                > STATUS: TESTNET_PRIVATE
             </div>
-        </div>
+            <div class="hero-text">
+                <h1>Monero Cash é <span>Dinheiro</span></h1>
+                <p style="color: #6b7280; font-size: 1.1rem; margin-bottom: 20px;">Uma criptomoeda privada, descentralizada e indetectável que mantém a total soberania financeira das suas transações sob absoluto sigilo.</p>
+                <a href="#sistema" class="btn">Explorar Projeto</a>
+            </div>
+        </section>
 
-        <!-- Lado Direito: O Painel de Status / Simulador de Rede -->
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <span class="dot dot-r"></span>
-                <span class="dot dot-y"></span>
-                <span class="dot dot-g"></span>
-                <span class="terminal-title">xmr_cash_core.sys</span>
+        <!-- Seção de Captura de Elite (Efeito Hype do Manus AI) -->
+        <section id="sistema" class="waitlist-box">
+            <h2>Fase de Desenvolvimento Operacional Solo</h2>
+            <p>A infraestrutura de nós e o Bloco Gênesis estão sendo gerados localmente. Inscreva seu e-mail criptografado na lista de espera para reter o direito de acesso antecipado às alocações de fundadores (SAFT).</p>
+            <form class="input-group" onsubmit="alert('E-mail registrado no sistema de segurança local.'); return false;">
+                <input type="email" placeholder="Digite seu melhor e-mail institucional" required>
+                <button type="submit" class="btn">Garantir Acesso</button>
+            </form>
+        </section>
+
+        <!-- Recursos do Ecossistema Limpos e Funcionais -->
+        <section id="começar" class="grid">
+            <div class="card">
+                <h3>Escolha uma Carteira</h3>
+                <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">Interfaces locais geradas inteiramente client-side. Suas chaves privadas nunca deixam seu navegador, garantindo imunidade regulatória total.</p>
+                <a href="#" class="btn btn-dark">Em Breve</a>
             </div>
-            <div class="terminal-body">
-                <div class="stat-line">
-                    <div class="stat-label">> PROTOCOLO:</div>
-                    <div class="stat-value crypto">MONERO CASH (XMR-C)</div>
-                </div>
-                <div class="stat-line">
-                    <div class="stat-label">> STATUS DO SISTEMA:</div>
-                    <div class="stat-value active">LEVEL UP IN PROGRESS...</div>
-                </div>
-                <div class="stat-line">
-                    <div class="stat-label">> BLOCO GÊNESIS:</div>
-                    <div class="stat-value">RESERVADO EM SANDBOX</div>
-                </div>
-                <div class="stat-line">
-                    <div class="stat-label">> ALOCAÇÃO DO TIME (PREMINE):</div>
-                    <div class="stat-value crypto">5.0% COMPROMISSADO (SAFT)</div>
-                </div>
-                
-                <div class="divider"></div>
-                
-                <div class="stat-line">
-                    <div class="stat-label">> SEGURANÇA CYBER:</div>
-                    <div class="stat-value" style="color: var(--accent);">RING SIGNATURES V4</div>
-                </div>
-                
-                <div class="pulse-box">
-                    <span class="pulse-dot"></span>
-                    <span>Aguardando ativação dos nós na internet...</span>
-                </div>
+            <div class="card">
+                <h3>Mineração do Bloco</h3>
+                <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">Algoritmo resistente a ASICs focado em CPUs de computadores comuns. Prepare suas máquinas locais para garantir a segurança da rede.</p>
+                <a href="#" class="btn btn-dark">Ver Guias</a>
             </div>
-        </div>
+            <div class="card">
+                <h3>Guias e Recursos</h3>
+                <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">Documentação técnica aprofundada cobrindo assinaturas em anel ocultas e blindagem de endereços para desenvolvedores Web3.</p>
+                <a href="#" class="btn btn-dark">Whitepaper</a>
+            </div>
+            <div class="card">
+                <h3>Matriz de Liquidez</h3>
+                <p style="color: #6b7280; margin-bottom: 20px; font-size: 0.95rem;">Planejamento estratégico de lançamento de pools privados em corretoras descentralizadas (DEXs) para liquidez de capital imediata.</p>
+                <a href="#" class="btn btn-dark">Tokenomics</a>
+            </div>
+        </section>
 
     </div>
 
+    <!-- Estrutura de Links de Rodapé Corporativo (Estilo Engenharia Estratégica) -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a href="#">Sobre a Moeda</a></li>
+                    <li><a href="#">Especificações</a></li>
+                    <li><a href="#">Código Fonte</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Privacidade</h4>
+                <ul>
+                    <li><a href="#">Ring CT</a></li>
+                    <li><a href="#">Endereços Ocultos</a></li>
+                    <li><a href="#">Criptografia</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Governança</h4>
+                <ul>
+                    <li><a href="#">Modelo SAFT</a></li>
+                    <li><a href="#">Premine Alocação</a></li>
+                    <li><a href="#">Investidores</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Segurança</h4>
+                <ul>
+                    <li><a href="#">Auditorias</a></li>
+                    <li><a href="#">Sandbox Local</a></li>
+                    <li><a href="#">Vercel Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Protocolo Monero Cash. Conduzido de forma independente sob licença open-source BSD de código limpo.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
-
